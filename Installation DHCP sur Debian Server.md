@@ -29,6 +29,7 @@ sudo apt install isc-dhcp-server
 
 ```
 
+
 # Configurer le serveur DHCP
 
 - Récupérer le nom des interfaces 
@@ -63,7 +64,7 @@ INTERFACESv4="nomdelinterface"
 
 ```
 
-![[fichier_etc.png]]
+![fichier_etc](https://github.com/user-attachments/assets/01ffbfe2-f488-4ee7-b48f-90b1f04cb3aa)
 
 - Indiquer les configuration du service dans le fichier dhcpd.conf 
 (*Chaque ligne doit se terminer par ;*)
@@ -73,8 +74,8 @@ INTERFACESv4="nomdelinterface"
 sudo nano /etc/dhcp/dhcpd.conf
 
 ```
+![fichier_dhcpd](https://github.com/user-attachments/assets/7f3b435d-db01-4ccc-8bee-9d0417da8adf)
 
-![[fichier_dhcpd.png]]
 # Démarrer et activer le serveur DHCP
 
 - Lancement du service dhcp
@@ -82,7 +83,6 @@ sudo nano /etc/dhcp/dhcpd.conf
 ```bash
 
 systemctl start isc-dhcp-server
-
 systemctl enable isc-dhcp-server
 
 ```
@@ -94,7 +94,8 @@ systemctl enable isc-dhcp-server
 sudo systemctl status isc-dhcp-server
 
 ```
-![[status.png]]
+![status](https://github.com/user-attachments/assets/7845e56a-e0d2-4584-a89f-dec858c0be5c)
+
 # Vérifier la configuration sur la machine client
 
 ```bash
@@ -102,15 +103,17 @@ sudo systemctl status isc-dhcp-server
 ip a
 
 ```
-![[verif1.png]]
+
+![verif1](https://github.com/user-attachments/assets/d2481365-ccab-4fb8-8e8c-af1a457e3a67)
+
 # Réservation d'une adresse IP pour un client
 
 - Récupérer l'adresse MAC du client : 
 	```bash
 	ip link show
 	```
-	
-![[Pasted image 20241103205406.png]]
+![Pasted image 20241103205406](https://github.com/user-attachments/assets/4ea9637f-6953-438a-9db0-b80a9e998d5e)
+
 
 - Modifier le fichier dhcpd.conf
 
@@ -119,12 +122,13 @@ ip a
 sudo nano /etc/dhcp/dhcpd.conf
 
 ```
+![config_resa](https://github.com/user-attachments/assets/8a9a8c7d-6264-48d5-932d-16b7d4790f58)
 
-![[config_resa.png]]
 
 - Sauvegarder et redémarrer le service
 
 ```bash
+
 
 sudo service isc-dhcp-server restart
 
@@ -145,6 +149,7 @@ sudo dhcpd -t
 ip a
 
 ```
-![[ipverif.png]]
+![ipverif](https://github.com/user-attachments/assets/fa6fe8b0-83d6-4b63-98ae-88266e934de8)
+
 
 (si besoin utiliser la commande sudo dhcpcd -k enp0s8 pour liberer  l'adresse IP actuelle)
