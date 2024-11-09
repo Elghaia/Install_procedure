@@ -87,6 +87,12 @@ Cliquez sur OK.
 
 #### Étape 4 : Tester le serveur DNS
 
+**Utilisez nslookup pour vérifier les enregistrements :**
+
+nslookup serveur.wilders.lan
+nslookup client.wilders.lan
+nslookup dns.wilders.lan
+
 
 
 
