@@ -20,7 +20,7 @@ Cliquez sur "Suivant" et installez le rôle.
 ![end](https://github.com/user-attachments/assets/a974b279-499d-43c0-bd9e-0d72748a87b7)
 
 
-#### Étape 2 : Configurer le service DNS
+#### Étape 2 : Configurer la zone wilder.lan 
 
 Dans le Gestionnaire de serveur, cliquez sur "Outils" puis sur "DNS".
 ![tool](https://github.com/user-attachments/assets/9b00208f-66c1-469b-afc7-88956914f78b)
@@ -31,7 +31,9 @@ Dans la console DNS manager qui s'affiche, faites un clic droit sur "Zone de rec
 
 ![new zone](https://github.com/user-attachments/assets/879c41e3-cfc5-4ae7-8888-15733a1ef296)
 
-Après l’écran de bienvenue, vous devriez avoir l’écran suivant : laissez l'option "Zone primaire" puis cliquez sur Suivant.
+Après l’écran de bienvenue, vous devriez avoir l’écran suivant : laissez l'option **"Zone primaire"** 
+**Cette option indique que le serveur DNS que vous configurez est autoritaire pour cette zone** puis cliquez sur Suivant.
+
 ![primary zone](https://github.com/user-attachments/assets/8e135f33-b6f4-4fc6-838f-15bf16b4bd0a)
 
 
@@ -43,19 +45,46 @@ Laissez le nom par défeaut :
 
 ![new file](https://github.com/user-attachments/assets/dc609dfb-d890-4caa-8482-46656db7ddd3)
 
-L'Active Directory n'étant pas encore mis en place , laissez l'option  par défaut ne pas mettre à jour dynamiquement:
+L'Active Directory n'étant pas encore mis en place , laissez l'option par défaut ne pas mettre à jour dynamiquement:
 
 ![sans AD](https://github.com/user-attachments/assets/cc39143b-3c66-4c69-bc0b-1e4e56aea62c)
-
 
 Cliquez sur Finish et vous le verrez apparaitre dans le DNS manager :
 
 ![affichage](https://github.com/user-attachments/assets/6d0bd0fb-2237-44a1-ad4c-407fd72d9728)
 
 
+#### Étape 3 : Ajouter des enregistrements
 
+**Ajouter un enregistrement A pour le serveur DNS**
 
+Dans la console DNS, faites un clic droit sur wilders.lan et choisissez Nouvel enregistrement hôte (A ou AAAA).
+![new A](https://github.com/user-attachments/assets/0bd67411-f385-4e40-a243-9859528ca87d)
 
+Entrez Nom : ns1 (ce qui donne ns1.wilders.lan). (Par convention on va choisir ns1 pour un serveur DNS principal)
+
+Dans Adresse IP, entrez l'IP de votre serveur DNS : 172.20.05
+Cliquez sur Ajouter.
+
+Ajouter un enregistrement A pour ns1.wilders.lan :
+
+**Ajouter un enregistrement A pour serveur.wilders.lan**
+
+Faites un clic droit sur wilders.lan et sélectionnez Nouvel enregistrement hôte (A ou AAAA).
+Entrez Nom : serveur (ce qui donne serveur.wilders.lan).
+Entrez l'adresse IP fixe réservée à cette machine : 172.20.0.10 
+Cliquez sur Ajouter.
+
+**Ajouter un enregistrement CNAME pour dns.wilders.lan**
+Faites un clic droit sur wilders.lan et choisissez Nouvel alias (CNAME).
+
+Entrez Nom : dns (ce qui donne dns.wilders.lan).
+
+Dans Nom canonique, entrez ns1.wilders.lan pour que dns.wilders.lan redirige vers ns1.wilders.lan.
+
+Cliquez sur OK.
+
+#### Étape 4 : Tester le serveur DNS
 
 
 
