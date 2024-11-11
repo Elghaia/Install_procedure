@@ -94,5 +94,33 @@ nslookup client.wilders.lan
 nslookup dns.wilders.lan
 
 
+#### Étape 4 : Tester le serveur DNS
+
+**Utilisez nslookup pour vérifier les enregistrements :**
+
+nslookup serveur.wilder.lan
+nslookup client.wilder.lan
+nslookup dns.wilder.lan
+
+Lancer les commandes depuis le serveur.
+
+Configurez le client Windows pour qu'il utilise le serveur DNS en IPv4 :
+
+Ouvrez le Panneau de configuration.
+Allez dans Réseau et Internet > Centre Réseau et partage > Modifier les paramètres de la carte.
+Faites un clic droit sur l'interface Ethernet et choisissez Propriétés.
+Sélectionnez Protocole Internet version 4 (TCP/IPv4) et cliquez sur Propriétés.
+Cochez Utiliser l'adresse de serveur DNS suivante.
+Dans Serveur DNS préféré, entrez 172.20.0.2 (adresse du serveur DNS de votre réseau).
+Cliquez sur OK pour appliquer les modifications.
+
+![dnsclient](https://github.com/user-attachments/assets/fe24284c-6ece-47a1-a272-bbb2be0206bb)
+
+
+Lancer les commandes depuis le client.
+
+Le resultat doit renvoyer ca :
+![resultat](https://github.com/user-attachments/assets/530bb4b5-3e7f-44c6-9204-a141b7bda93f)
+
 
 
