@@ -99,7 +99,25 @@ Dans Nom canonique, entrez server.wilder.lan pour que dns.wilder.lan redirige ve
 
 Cliquez sur OK.
 
-#### Étape 4 : Tester le serveur DNS
+#### Étape 4 : Configurer la zone inversé
+
+Dans la console DNS manager , faites un clic droit sur "Zone de recherche indirect" (ou Reverse lookup zone si server en anglais) et sélectionnez "Nouvelle zone".
+
+Laisser l'option primary zone et entrez votre adresse ip 
+
+![reverse_prim](https://github.com/user-attachments/assets/0baa17e8-9f3a-4277-bd53-e1afe0c6df32)
+
+Sélectionner IPV4
+
+![reverse_name](https://github.com/user-attachments/assets/677f924f-8c12-4471-babf-383e80d7d57c)
+
+Sélectionner Networik id et entrez votre IP
+
+![reverse_ip](https://github.com/user-attachments/assets/90587b33-ec68-4e90-a078-0cfb9fd723f2)
+
+Poursuivez avec les autres paramètres par défaut
+
+#### Étape 5 : Tester le serveur DNS
 
 **Utilisez nslookup pour vérifier les enregistrements :**
 
@@ -112,9 +130,9 @@ nslookup dns.wilder.lan
 
 **Utilisez nslookup pour vérifier les enregistrements :**
 
-nslookup serveur.wilder.lan
-nslookup client.wilder.lan
-nslookup dns.wilder.lan
+- nslookup serveur.wilder.lan
+- nslookup client.wilder.lan
+- nslookup dns.wilder.lan
 
 Lancer les commandes depuis le serveur.
 
