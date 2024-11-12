@@ -119,16 +119,7 @@ Poursuivez avec les autres paramètres par défaut
 
 #### Étape 5 : Tester le serveur DNS
 
-**Utilisez nslookup pour vérifier les enregistrements :**
-
-nslookup serveur.wilder.lan
-nslookup client.wilder.lan
-nslookup dns.wilder.lan
-
-
-#### Étape 4 : Tester le serveur DNS
-
-**Utilisez nslookup pour vérifier les enregistrements :**
+Utilisez la commande **nslookup** pour vérifier les enregistrements :
 
 - nslookup serveur.wilder.lan
 - nslookup client.wilder.lan
