@@ -2,9 +2,11 @@
 Ouvrir le Gestionnaire de serveur :
 
 Dans le Gestionnaire de serveur, cliquez sur "Gérer" puis sur "Ajouter des rôles et des fonctionnalités" :
+
 ![addrole](https://github.com/user-attachments/assets/4359d6e3-4faa-4896-86e4-1c3afdf8b4ef)
 
 Choisissez l'option "Installation basée sur un rôle ou une fonctionnalité" et poursuivez.
+
 ![type](https://github.com/user-attachments/assets/b49a1aed-297f-46df-8b29-2116c6353008)
 
 
@@ -18,16 +20,19 @@ Dans la liste des rôles, cochez "DNS Server" et au sein de la fenêtre qui s'af
 ![dns service](https://github.com/user-attachments/assets/c6b8bec6-09c5-4473-84b4-36ca4d168321)
 
 Cliquez sur "Suivant" et installez le rôle.
+
 ![end](https://github.com/user-attachments/assets/a974b279-499d-43c0-bd9e-0d72748a87b7)
 
 
 #### Étape 2 : Configurer la zone wilder.lan 
 
 Dans le Gestionnaire de serveur, cliquez sur "Outils" puis sur "DNS".
+
 ![tool](https://github.com/user-attachments/assets/9b00208f-66c1-469b-afc7-88956914f78b)
 
 
 Dans la console DNS manager qui s'affiche, faites un clic droit sur "Zone de recherche direct" (ou Forward lookup zone si server en anglais) et sélectionnez "Nouvelle zone".
+
 ![add new](https://github.com/user-attachments/assets/e181c122-1476-4946-abbc-3724f668ad87)
 
 ![new zone](https://github.com/user-attachments/assets/879c41e3-cfc5-4ae7-8888-15733a1ef296)
