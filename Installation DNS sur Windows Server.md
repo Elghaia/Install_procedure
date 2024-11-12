@@ -10,7 +10,8 @@ Choisissez l'option "Installation basée sur un rôle ou une fonctionnalité" et
 
 Poursuivez directement, car le serveur local est déjà sélectionné.
 
-![serverselection](https://github.com/user-attachments/assets/544193d9-7cf7-4ad5-bb1e-dc27eec00931)
+![serveur](https://github.com/user-attachments/assets/401b9e03-f352-48b9-aa80-f581ab82fef8)
+
 
 Dans la liste des rôles, cochez "DNS Server" et au sein de la fenêtre qui s'affiche, vérifiez que l'option "Inclure les outils de gestion" soit cochée.
 
