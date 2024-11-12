@@ -38,7 +38,7 @@ Après l’écran de bienvenue, vous devriez avoir l’écran suivant : laissez 
 ![primary zone](https://github.com/user-attachments/assets/8e135f33-b6f4-4fc6-838f-15bf16b4bd0a)
 
 
-Entrez le nom de la zone : wilders.lan et cliquez sur Suivant.
+Entrez le nom de la zone : wilder.lan et cliquez sur Suivant.
 
 ![zone name](https://github.com/user-attachments/assets/8ed447c2-4095-41f2-9c81-c4802015a0b6)
 
@@ -57,12 +57,12 @@ Cliquez sur Finish et vous le verrez apparaitre dans le DNS manager :
 
 #### Étape 3 : Ajouter des enregistrements
 
-**Ajouter un enregistrement A pour serveur.wilders.lan**
+**Ajouter un enregistrement A pour serveur.wilder.lan**
 
-Dans la console DNS, faites un clic droit sur wilders.lan et choisissez Nouvel enregistrement hôte (A ou AAAA).
+Dans la console DNS, faites un clic droit sur wilder.lan et choisissez Nouvel enregistrement hôte (A ou AAAA).
 
 ![new A](https://github.com/user-attachments/assets/0bd67411-f385-4e40-a243-9859528ca87d)
-Entrez Nom : serveur (ce qui donne serveur.wilders.lan).
+Entrez Nom : serveur (ce qui donne serveur.wilder.lan).
 Entrez l'adresse IP fixe réservée à cette machine : 172.20.0.2 
 ![newhost](https://github.com/user-attachments/assets/73d67d75-6378-4703-b590-ff7ad6ce8a81)
 Cliquez sur Ajouter.
@@ -71,7 +71,7 @@ Cliquez sur Ajouter.
 
 Dans la console DNS, faites un clic droit sur wilders.lan et choisissez Nouvel enregistrement hôte (A ou AAAA).
 ![new A](https://github.com/user-attachments/assets/0bd67411-f385-4e40-a243-9859528ca87d)
-Entrez Nom : client (ce qui donne serveur.wilders.lan).
+Entrez Nom : client (ce qui donne serveur.wilder.lan).
 Entrez l'adresse IP fixe réservée à cette machine : 172.20.0.10
 ![clienthost](https://github.com/user-attachments/assets/2d0c80e9-2b82-46dc-842d-0bb627535cf9)
 Cliquez sur Ajouter.
@@ -80,8 +80,8 @@ Cliquez sur Ajouter.
 Faites un clic droit sur wilders.lan et choisissez Nouvel alias (CNAME).
 ![cnam](https://github.com/user-attachments/assets/4dcb4873-e27a-40be-a00b-068ac7885353)
 
-Entrez Nom : dns (ce qui donne dns.wilders.lan).
-Dans Nom canonique, entrez server.wilders.lan pour que dns.wilders.lan redirige vers server.wilders.lan.
+Entrez Nom : dns (ce qui donne dns.wilder.lan).
+Dans Nom canonique, entrez server.wilder.lan pour que dns.wilder.lan redirige vers server.wilders.lan.
 ![cnamhost](https://github.com/user-attachments/assets/4f531b81-c433-40c0-97cc-903e60300020)
 
 Cliquez sur OK.
@@ -90,9 +90,9 @@ Cliquez sur OK.
 
 **Utilisez nslookup pour vérifier les enregistrements :**
 
-nslookup serveur.wilders.lan
-nslookup client.wilders.lan
-nslookup dns.wilders.lan
+nslookup serveur.wilder.lan
+nslookup client.wilder.lan
+nslookup dns.wilder.lan
 
 
 #### Étape 4 : Tester le serveur DNS
