@@ -82,8 +82,8 @@ sudo nano /etc/dhcp/dhcpd.conf
 
 ```bash
 
-systemctl start isc-dhcp-server
-systemctl enable isc-dhcp-server
+systemctl start isc-dhcp-server.service
+systemctl enable isc-dhcp-server.service
 
 ```
 
@@ -91,7 +91,7 @@ systemctl enable isc-dhcp-server
 
 ```bash
 
-sudo systemctl status isc-dhcp-server
+sudo systemctl status isc-dhcp-server.service
 
 ```
 ![status](https://github.com/user-attachments/assets/7845e56a-e0d2-4584-a89f-dec858c0be5c)
