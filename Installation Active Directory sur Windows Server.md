@@ -59,7 +59,9 @@ Remarque : les rôles DNS et DHCP seront ajoutés plus tard.
 ![pre](https://github.com/user-attachments/assets/ccae16e9-7aca-460e-8b58-b84959fce579)
 
 
-
 16. L’opération dure quelques minutes et le redémarrage de Windows prendra plus de temps que d’habitude, le temps de configurer le contrôleur de domaine.
 
 17. La connexion à Windows doit maintenant se faire sur le domaine pour utiliser le compte Administrateur du domaine. Utiliser le mot de passe du compte Administrateur créé lors de l’installation de Windows Server 2016.
+
+18. ![Capture d’écran 2024-11-17 163624](https://github.com/user-attachments/assets/b572b919-70a6-48da-9897-977145c19a67)
+
