@@ -1,0 +1,75 @@
+Configuration d'un partage de fichiers sur Windows Server 2022 avec PowerShell
+Commentaire : Bien que l'interface graphique offre une approche visuelle, PowerShell est un outil puissant pour automatiser et gérer les tâches de manière plus efficace. Voici une approche complète utilisant PowerShell pour réaliser la configuration décrite précédemment.
+
+Prérequis
+Un serveur Windows Server 2022 avec le rôle ADDS déployé
+Un poste client Windows 10
+Des groupes AD créés : "RH", "Comptabilité", "Direction"
+Des utilisateurs appartenant à ces groupes
+Script PowerShell
+PowerShell
+
+# Nom du serveur et du partage
+$serveur = "SRVWIN"
+$partage = "Docs"
+$dossier_partage = "C:\Documents_Entreprise"
+
+# Création du dossier et des sous-dossiers si nécessaire
+New-Item -Path $dossier_partage -ItemType directory -Force
+New-Item -Path "$dossier_partage\RH" -ItemType directory -Force
+New-Item -Path "$dossier_partage\Comptabilité" -ItemType directory -Force
+New-Item -Path "$dossier_partage\Direction" -ItemType directory -Force
+
+# Création du partage SMB
+New-SmbShare -Name $partage -Path $dossier_partage
+
+# Configuration des permissions NTFS
+$groupe_rh = "wilder.lan\RH"
+$groupe_compta = "wider.lan\Comptabilité"
+$groupe_direction = "wilder.lan\Direction"
+
+# Attribuer les permissions NTFS
+Set-Acl -Path "$dossier_partage\RH" -AccessRule "IdentityReference=$groupe_rh;AccessControlType='Allow';Rights='FullControl'"
+Set-Acl -Path "$dossier_partage\Comptabilité" -AccessRule "IdentityReference=$groupe_compta;AccessControlType='Allow';Rights='FullControl'"
+Set-Acl -Path $dossier_partage -AccessRule "IdentityReference=$groupe_direction;AccessControlType='Allow';Rights='FullControl'"
+Set-Acl -Path $dossier_partage -AccessRule "IdentityReference='Everyone';AccessControlType='Allow';Rights='Read'"
+
+# Vérifier les partages
+Get-SmbShare
+
+# Mapper un lecteur réseau depuis PowerShell (poste client):
+
+New-SmbMapping -LocalPath "\\nom_du_serveur\Docs" -RemotePath "Z:"
+
+# Tests des accès
+Get-ChildItem -Path "Z:"
+
+
+Explication du script
+Variables: Les variables $serveur, $partage et $dossier_partage sont utilisées pour personnaliser le script.
+Création de dossiers: Les commandes New-Item créent le dossier principal et les sous-dossiers.
+Création du partage: New-SmbShare crée le partage SMB avec le nom spécifié et le chemin vers le dossier.
+Configuration des permissions NTFS: Set-Acl permet de définir les permissions NTFS pour chaque groupe. Remplacez DOMAIN par le nom de votre domaine.
+Vérification: Get-SmbShare liste tous les partages SMB sur le serveur.
+Utilisation du script
+Enregistrer le script dans un fichier PowerShell (par exemple, configurer_partage.ps1).
+Ouvrir PowerShell en tant qu'administrateur.
+Naviguer vers le répertoire où vous avez enregistré le script.
+Exécuter le script :
+PowerShell
+
+.\configurer_partage.ps1
+
+
+
+Mapper un lecteur réseau depuis PowerShell (poste client):
+
+PowerShell
+
+New-SmbMapping -LocalPath "\\nom_du_serveur\Docs" -RemotePath "Z:"
+Astuces supplémentaires:
+
+Quotas: Utilisez New-SmbShare avec les paramètres -MaximumAllowedShareSize et -QuotasEnabled pour définir des quotas de stockage.
+Clichés instantanés: Utilisez Set-SmbShare avec le paramètre -EnableShadowCopies pour activer les clichés instantanés.
+Permissions avancées: Explorez les paramètres de Set-Acl pour des configurations plus complexes (héritage, permissions spéciales, etc.).
+En utilisant PowerShell, vous pouvez automatiser et personnaliser la configuration de vos partages de fichiers de manière beaucoup plus efficace qu'en utilisant uniquement l'interface graphique.
