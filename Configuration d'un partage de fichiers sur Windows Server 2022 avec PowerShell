@@ -73,3 +73,88 @@ Quotas: Utilisez New-SmbShare avec les paramètres -MaximumAllowedShareSize et -
 Clichés instantanés: Utilisez Set-SmbShare avec le paramètre -EnableShadowCopies pour activer les clichés instantanés.
 Permissions avancées: Explorez les paramètres de Set-Acl pour des configurations plus complexes (héritage, permissions spéciales, etc.).
 En utilisant PowerShell, vous pouvez automatiser et personnaliser la configuration de vos partages de fichiers de manière beaucoup plus efficace qu'en utilisant uniquement l'interface graphique.
+
+
+----------------------------------------------------------
+
+
+Superbe ! Voici une procédure détaillée en Markdown, incluant les commandes PowerShell pour réaliser votre configuration, ainsi qu'une partie pour les tests :
+Prérequis:
+Un serveur Windows Server 2022 avec le rôle ADDS déployé
+Un poste client Windows 10
+Des groupes AD créés : "RH", "Comptabilité", "Direction"
+Des utilisateurs appartenant à ces groupes
+Partie 1 : Configuration du serveur
+1. Installation du rôle Serveur de fichiers:
+
+Install-WindowsFeature FS-FileServer
+
+2. Création du dossier et du partage:
+
+New-Item -Path "C:\Documents_Entreprise" -ItemType directory
+New-SmbShare -Name Docs -Path "C:\Documents_Entreprise"
+
+3. Création des sous-dossiers:
+
+New-Item -Path "C:\Documents_Entreprise\RH" -ItemType directory
+New-Item -Path "C:\Documents_Entreprise\Comptabilité" -ItemType directory
+New-Item -Path "C:\Documents_Entreprise\Direction" -ItemType directory
+4. Configuration des permissions NTFS:
+
+PowerShell
+
+# Fonction pour ajouter une règle d'accès à un descripteur de sécurité
+function Add-AccessRule {
+    param(
+        [Parameter(Mandatory)]
+        [string]$path,
+        [string]$identityReference,
+        [string]$rights
+    )
+
+    $acl = Get-Acl $path
+    $rule = New-Object System.Security.AccessControl.FileSystemAccessRule($identityReference, $rights, "Allow")
+    $acl.AddAccessRule($rule)
+    Set-Acl -Path $path -AclObject $acl
+}
+
+# Ajouter les permissions
+Add-AccessRule -path "C:\Documents_Entreprise\RH" -identityReference "wilder.lan\RH" -rights "FullControl"
+Add-AccessRule -path "C:\Documents_Entreprise\Comptabilité" -identityReference "wilder.lan\Comptabilité" -rights "FullControl"
+Add-AccessRule -path "C:\Documents_Entreprise\Direction" -identityReference "wilder.lan\Direction" -rights "FullControl"
+Add-AccessRule -path "C:\Documents_Entreprise" -identityReference "Everyone" -rights "Read"
+5. Lister les partages:
+
+PowerShell
+
+Get-SmbShare
+Partie 2 : Configuration du poste client
+1. Mapper un lecteur réseau:
+
+PowerShell
+
+New-SmbMapping -LocalPath "\\nom_du_serveur\Docs" -RemotePath "Z:"
+Remplacer nom_du_serveur par le nom DNS ou l'adresse IP du serveur.
+Partie 3 : Tests
+Se connecter au poste client avec différents comptes utilisateurs (RH, Comptabilité, Direction, un utilisateur standard).
+Vérifier les accès :
+Les membres de "RH" doivent pouvoir lire et écrire dans "RH" mais pas dans les autres dossiers.
+Les membres de "Comptabilité" doivent pouvoir lire et écrire dans "Comptabilité" mais pas dans les autres dossiers.
+Les membres de "Direction" doivent pouvoir lire et écrire dans tous les dossiers.
+Tous les autres utilisateurs doivent pouvoir lire les fichiers dans "Documents_Entreprise" mais ne pas pouvoir écrire.
+Critères d'acceptation:
+Fonctionnalité: Les permissions sont correctement configurées et les utilisateurs peuvent accéder aux dossiers selon les droits définis.
+Sécurité: Les permissions sont restrictives et limitent l'accès aux données sensibles.
+Documentation: La procédure est claire, concise et facile à suivre.
+Automatisation: L'utilisation de PowerShell permet d'automatiser la configuration et de la reproduire facilement.
+Remarque:
+
+Sécurité: N'oubliez pas d'adapter les noms de groupes et les droits en fonction de votre environnement spécifique.
+Optimisation: Vous pouvez personnaliser davantage cette procédure en ajoutant des fonctionnalités comme la gestion des erreurs, la journalisation, ou en utilisant des variables pour rendre le script plus flexible.
+Cette procédure vous fournit une base solide pour configurer votre partage de fichiers. N'hésitez pas à poser d'autres questions si vous avez besoin de plus d'informations.
+
+Pour aller plus loin:
+
+Permissions avancées: Explorez les différentes propriétés de FileSystemAccessRule pour définir des permissions plus complexes.
+Audit: Configurez l'audit pour suivre les modifications apportées aux permissions.
+Sécurité: Appliquez le principe du moindre privilège en accordant uniquement les droits nécessaires.
